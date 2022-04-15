@@ -8,8 +8,8 @@ class Engine
 {
     private:
         sf::Event sfEvent;
-        sf::RenderWindow* window;
-        std::stack<State*> states;
+        sf::RenderWindow *window;
+        std::stack<State *> states;
 
     public:
         Engine();
