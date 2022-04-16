@@ -2,12 +2,12 @@
 #define MAINSTATE_H
 
 #include "state.h"
+#include "../shapes/square.h"
 
 class MainState : public State
 {
     private:
         sf::RectangleShape* frame[4];
-        sf::CircleShape* c = new sf::CircleShape(10.0f);
 
     public:
         MainState(sf::RenderWindow* window);

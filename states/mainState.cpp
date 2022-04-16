@@ -23,11 +23,6 @@ MainState::MainState(sf::RenderWindow* window)
     this->frame[3] = new sf::RectangleShape(sf::Vector2f(sizeX, thickness)); // нижняя сторона
     this->frame[3]->setOrigin(sizeX / (margin * 2) / 2, thickness / 2);
     this->frame[3]->setPosition(margin, this->window->getSize().y - margin);
-
-    this->c->setOrigin(5.0f, 5.0f);
-    this->c->setPosition(170, 165);
-
-    std::cout << this->frame[1]->getGlobalBounds().intersects(this->c->getGlobalBounds()); // Проверка на правильность проверки столкновений 
 }
 
 MainState::~MainState()
@@ -46,6 +41,4 @@ void MainState::render()
     {
         this->window->draw(*line);
     }
-
-    this->window->draw(*this->c);
 }
