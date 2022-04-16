@@ -2,7 +2,7 @@
 
 Engine::Engine()
 {
-    this->window = new sf::RenderWindow(sf::VideoMode(1000, 700), "Hitbox Prototype");
+    this->window = new sf::RenderWindow(sf::VideoMode(1100, 800), "Hitbox Prototype");
     this->states.push(new MainState(this->window));
 }
 
