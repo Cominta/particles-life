@@ -10,6 +10,7 @@ class Engine
         sf::Event sfEvent;
         sf::RenderWindow *window;
         std::stack<State *> states;
+        float delta;
 
     public:
         Engine();
@@ -17,6 +18,7 @@ class Engine
 
         void update();
         void updateSFML();
+        void updateDelta();
 
         void render();
 

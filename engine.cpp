@@ -2,6 +2,8 @@
 
 Engine::Engine()
 {
+    this->delta = 0.0f;
+
     this->window = new sf::RenderWindow(sf::VideoMode(1100, 800), "Hitbox Prototype");
     this->states.push(new MainState(this->window));
 }
@@ -14,9 +16,15 @@ Engine::~Engine()
 void Engine::update()
 {
     this->updateSFML();
+    this->updateDelta();
 
     if (!this->states.empty())
     {
+        if (this->states.top()->statesClass == State::states::MAINSTATE)
+        {
+            this->states.top()->update(this->delta);
+        }
+
         this->states.top()->update();
     }
 }
@@ -30,6 +38,13 @@ void Engine::updateSFML()
             this->window->close();
         }
     }
+}
+
+void Engine::updateDelta()
+{
+    sf::Clock deltaClock;
+    sf::Time deltaTime = deltaClock.restart();
+    this->delta = deltaTime.asSeconds();
 }
 
 void Engine::render()

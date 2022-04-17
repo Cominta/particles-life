@@ -8,12 +8,13 @@ class MainState : public State
 {
     private:
         sf::RectangleShape* frame[4];
+        Square* square;
 
     public:
         MainState(sf::RenderWindow* window);
         ~MainState();
 
-        void update();
+        void update(float deltaTime);
 
         void render();
 };

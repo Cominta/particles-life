@@ -1,8 +1,9 @@
 #include "shape.h"
 
 Shape::Shape(sf::RenderWindow* window)
+    : window(window)
 {
-    this->window = window;
+    
 }
 
 Shape::~Shape()

@@ -2,6 +2,7 @@
 #define SHAPE_H
 
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 class Shape
 {
@@ -10,7 +11,7 @@ class Shape
 
     public:
         Shape(sf::RenderWindow* window);
-        Shape();
+        ~Shape();
 
         virtual void update();
 

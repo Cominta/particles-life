@@ -16,6 +16,11 @@ void State::update()
 
 }
 
+void State::update(float deltaTime)
+{
+    
+}
+
 void State::render()
 {
 
