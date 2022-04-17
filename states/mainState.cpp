@@ -36,6 +36,12 @@ MainState::~MainState()
 void MainState::update(float deltaTime)
 {
     this->square->update(deltaTime);
+
+    // проверка на выход за рамку
+    if (this->frame[3]->getGlobalBounds().intersects(this->square->getShape()->getGlobalBounds()))
+    {
+        this->square->setPosition(this->square->getPosition().x, this->frame[3]->getPosition().y - this->square->getSize().y / 2);
+    }
 }
 
 void MainState::render()

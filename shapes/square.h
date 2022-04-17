@@ -17,6 +17,12 @@ class Square : public Shape
         void update(float deltaTime);
 
         void render();
+
+        sf::RectangleShape* getShape() {return this->shape;};
+        sf::Vector2f getPosition() {return this->shape->getPosition();}
+        sf::Vector2f getSize() {return this->shape->getSize();};
+
+        void setPosition(float x, float y) {this->shape->setPosition(x, y);};
 };
 
 #endif
