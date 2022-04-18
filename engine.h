@@ -11,6 +11,7 @@ class Engine
         sf::RenderWindow *window;
         std::stack<State *> states;
         float delta;
+        bool mousePress;
 
     public:
         Engine();

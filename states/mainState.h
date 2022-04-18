@@ -3,18 +3,20 @@
 
 #include "state.h"
 #include "../shapes/square.h"
+#include <vector>
 
 class MainState : public State
 {
     private:
         sf::RectangleShape* frame[4];
-        Square* square;
+        std::vector<Square* > objects;
+        float margin;
 
     public:
         MainState(sf::RenderWindow* window);
         ~MainState();
 
-        void update(float deltaTime);
+        void update(float deltaTime, bool mousePress);
 
         void render();
 };

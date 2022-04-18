@@ -15,6 +15,7 @@ class State
 
     protected:
         sf::RenderWindow* window;
+        sf::Vector2f mousePosition;
 
     public:
         states statesClass;
@@ -23,7 +24,8 @@ class State
         ~State();
 
         virtual void update();
-        virtual void update(float deltaTime);
+        virtual void update(float deltaTime, bool mousePress);
+        void updateMouse();
 
         virtual void render();
 };

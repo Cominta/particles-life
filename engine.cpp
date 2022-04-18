@@ -22,11 +22,13 @@ void Engine::update()
     {
         if (this->states.top()->statesClass == State::states::MAINSTATE)
         {
-            this->states.top()->update(this->delta);
+            this->states.top()->update(this->delta, this->mousePress);
         }
 
         this->states.top()->update();
     }
+
+    this->mousePress = false;
 }
 
 void Engine::updateSFML()
@@ -36,6 +38,11 @@ void Engine::updateSFML()
         if (this->sfEvent.type == sf::Event::Closed)
         {
             this->window->close();
+        }
+
+        else if (this->sfEvent.mouseButton.button == sf::Mouse::Button::Left && this->sfEvent.type == sf::Event::MouseButtonReleased)
+        {
+            this->mousePress = true;
         }
     }
 }

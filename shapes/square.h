@@ -2,19 +2,22 @@
 #define SQUARE_H
 
 #include "shape.h"
+#include "../components/hitboxSquare.h"
 
 class Square : public Shape
 {
     private:
         sf::RectangleShape* shape;
+        HitboxSquare* hitbox;
         float weight;
-        float currentSpeed;
+        float currentSpeedX;
+        float currentSpeedY;
 
     public:
         Square(sf::RenderWindow* window, float width, float height, sf::Color color, float x, float y);
         ~Square();
 
-        void update(float deltaTime);
+        void update(float deltaTime, sf::RectangleShape* (&frame)[4]);
 
         void render();
 
