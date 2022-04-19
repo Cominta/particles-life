@@ -9,7 +9,7 @@ class MainState : public State
 {
     private:
         sf::RectangleShape* frame[4];
-        std::vector<Square* > objects;
+        std::vector<Square*> objects;
         float margin;
 
     public:

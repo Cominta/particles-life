@@ -34,7 +34,6 @@ void Square::update(float deltaTime, sf::RectangleShape* (&frame)[4])
     else
     {
         this->currentSpeedY += 9.832f * deltaTime * weight;
-
     }
 
     this->shape->move(this->currentSpeedX, this->currentSpeedY);

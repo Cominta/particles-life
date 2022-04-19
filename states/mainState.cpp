@@ -24,8 +24,6 @@ MainState::MainState(sf::RenderWindow* window)
     this->frame[3] = new sf::RectangleShape(sf::Vector2f(sizeX, thickness)); // нижняя сторона
     this->frame[3]->setOrigin(sizeX / (this->margin * 2) / 2, thickness / 2);
     this->frame[3]->setPosition(this->margin, this->window->getSize().y - this->margin);
-    
-    this->objects.push_back(new Square(this->window, 100, 100, sf::Color::White, this->window->getSize().x / 2, this->window->getSize().y / 2));
 }
 
 MainState::~MainState()

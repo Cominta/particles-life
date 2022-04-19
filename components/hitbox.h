@@ -8,7 +8,7 @@ class Hitbox
 {
     protected:
         sf::RenderWindow* window;
-        sf::RectangleShape* hitboxShape;
+        std::vector<sf::RectangleShape*> hitboxShape;
 
     public:
         Hitbox(sf::RenderWindow* window);
