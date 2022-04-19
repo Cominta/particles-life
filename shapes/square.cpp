@@ -22,19 +22,27 @@ Square::~Square()
 
 void Square::update(float deltaTime, sf::RectangleShape* (&frame)[4])
 {
-    int result = this->hitbox->checkOut(frame);
-
-    if (result != -1)
+    this->currentSpeedY += 9.832f * deltaTime * weight;
+    
+    for (auto &line : frame)
     {
-        if (result == 3) {
+        Hitbox::sides result = this->hitbox->checkObject(line);
+
+        if (result == Hitbox::sides::BOTTOM)
             this->currentSpeedY = 0;
-        }
     }
 
-    else
-    {
-        this->currentSpeedY += 9.832f * deltaTime * weight;
-    }
+    // if (result != -1)
+    // {
+    //     if (result == 3) {
+    //         this->currentSpeedY = 0;
+    //     }
+    // }
+
+    // else
+    // {
+    //     this->currentSpeedY += 9.832f * deltaTime * weight;
+    // }
 
     this->shape->move(this->currentSpeedX, this->currentSpeedY);
     this->hitbox->update();

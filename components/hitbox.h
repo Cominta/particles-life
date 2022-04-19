@@ -6,6 +6,16 @@
 
 class Hitbox
 {
+    public:
+        enum class sides
+        {
+            LEFT,
+            TOP,
+            RIGHT,
+            BOTTOM,
+            NONE
+        };
+
     protected:
         sf::RenderWindow* window;
         std::vector<sf::RectangleShape*> hitboxShape;
@@ -18,7 +28,8 @@ class Hitbox
 
         virtual void render();
 
-        int checkOut(sf::RectangleShape* (&frame)[4]);
+        Hitbox::sides checkObject(sf::RectangleShape* frame); // для поверки столкновения с рамкой
+        Hitbox::sides checkObject(Hitbox* hitbox); // передаем хитбокс объекта, с которым нужно проверить столкновение
 };
 
 #endif

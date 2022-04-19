@@ -21,15 +21,34 @@ void Hitbox::render()
 
 }
 
-int Hitbox::checkOut(sf::RectangleShape* (&frame)[4])
+Hitbox::sides Hitbox::checkObject(sf::RectangleShape* frame)
 {
     for (int i = 0; i < 4; i++)
     {
-        if (frame[i]->getGlobalBounds().intersects(this->hitboxShape.at(i)->getGlobalBounds()))
+        if (this->hitboxShape.at(i)->getGlobalBounds().intersects(frame->getGlobalBounds()))
         {
-            return i;
+            switch (i)
+            {
+                case 0:
+                    return Hitbox::sides::LEFT;
+                
+                case 1:
+                    return Hitbox::sides::TOP;
+
+                case 2:
+                    return Hitbox::sides::RIGHT;
+
+                case 3:
+                    return Hitbox::sides::BOTTOM;
+
+                default:
+                    return Hitbox::sides::NONE;
+            }
         }
     }
+}
 
-    return -1;
+Hitbox::sides Hitbox::checkObject(Hitbox* hitbox)
+{
+
 }
