@@ -20,17 +20,17 @@ Square::~Square()
 
 }
 
-void Square::update(float deltaTime, sf::RectangleShape* (&frame)[4])
+void Square::update(float deltaTime)
 {
-    this->currentSpeedY += 9.832f * deltaTime * weight;
+    // this->currentSpeedY += 9.832f * deltaTime * weight;
     
-    for (auto &line : frame)
-    {
-        Hitbox::sides result = this->hitbox->checkObject(line);
+    // for (auto &line : frame)
+    // {
+    //     Hitbox::sides result = this->hitbox->checkObject(line);
 
-        if (result == Hitbox::sides::BOTTOM)
-            this->currentSpeedY = 0;
-    }
+    //     if (result == Hitbox::sides::BOTTOM)
+    //         this->currentSpeedY = 0;
+    // }
 
     // if (result != -1)
     // {

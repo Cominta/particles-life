@@ -17,13 +17,13 @@ class Engine
         Engine();
         ~Engine();
 
+        void start();
+        
         void update();
         void updateSFML();
         void updateDelta();
-
         void render();
 
-        void start();
 };
 
 #endif

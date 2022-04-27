@@ -13,6 +13,15 @@ Engine::~Engine()
 
 }
 
+void Engine::start()
+{
+    while (this->window->isOpen())
+    {
+        this->update();
+        this->render();
+    }
+}
+
 void Engine::update()
 {
     this->updateSFML();
@@ -64,13 +73,4 @@ void Engine::render()
     }
 
     this->window->display();
-}
-
-void Engine::start()
-{
-    while (this->window->isOpen())
-    {
-        this->update();
-        this->render();
-    }
 }

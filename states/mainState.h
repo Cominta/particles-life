@@ -4,20 +4,20 @@
 #include "state.h"
 #include "../shapes/square.h"
 #include <vector>
+#include "../components/quadtree/quadtree.h"
 
 class MainState : public State
 {
     private:
-        sf::RectangleShape* frame[4];
         std::vector<Square*> objects;
-        float margin;
+
+        Quadtree* quadtree;
 
     public:
         MainState(sf::RenderWindow* window);
         ~MainState();
 
         void update(float deltaTime, bool mousePress);
-
         void render();
 };
 

@@ -26,7 +26,6 @@ class State
         virtual void update();
         virtual void update(float deltaTime, bool mousePress);
         void updateMouse();
-
         virtual void render();
 };
 
