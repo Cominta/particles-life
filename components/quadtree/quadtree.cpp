@@ -20,8 +20,8 @@ Quadtree::~Quadtree()
 
 void Quadtree::insert(Point* point)
 {
-    if (!((*point).x >= this->x - this->width / 2 && (*point).x <= this->x + this->width / 2 &&
-        (*point).y >= this->y - this->height / 2 && (*point).y <= this->y + this->height / 2)) // AABB
+    if (!((*point).x + 2.5f >= this->x - this->width / 2 && (*point).x - 2.5f <= this->x + this->width / 2 &&
+        (*point).y + 2.5f >= this->y - this->height / 2 && (*point).y - 2.5f <= this->y + this->height / 2)) // AABB
     {
         return;
     }
@@ -29,6 +29,7 @@ void Quadtree::insert(Point* point)
     if (this->points.size() < this->size)
     {
         this->points.emplace_back(point);
+        std::cout << "W " << this->points.size() << "\n";
     }
 
     else
@@ -37,6 +38,16 @@ void Quadtree::insert(Point* point)
         {
             this->subdivide();
             this->divided = true;
+
+            // for (auto &point1 : this->points)
+            // {
+            //     this->lt->insert(point1);
+            //     this->rt->insert(point1);
+            //     this->rb->insert(point1);
+            //     this->lb->insert(point1);
+            // }
+
+            // this->points.clear();
         }
 
         this->lt->insert(point);
@@ -51,7 +62,7 @@ void Quadtree::subdivide()
     int newWidth = this->width / 2;
     int newHeight = this->height / 2;
 
-    this->lt = new Quadtree(this->window, 4, this->x - this->width / 4, this->height / 4, newWidth, newHeight);
+    this->lt = new Quadtree(this->window, 4, this->x - this->width / 4, this->y - this->height / 4, newWidth, newHeight);
     this->rt = new Quadtree(this->window, 4, this->x + this->width / 4, this->y - this->height / 4, newWidth, newHeight);
     this->rb = new Quadtree(this->window, 4, this->x + this->width / 4, this->y + this->height / 4, newWidth, newHeight);
     this->lb = new Quadtree(this->window, 4, this->x - this->width / 4, this->y + this->height / 4, newWidth, newHeight);

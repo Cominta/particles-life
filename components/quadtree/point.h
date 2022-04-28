@@ -8,7 +8,7 @@ class Point
 {
     private:
         sf::RenderWindow* window;
-        sf::CircleShape* c;
+        sf::RectangleShape* r;
 
     public:
         int x;
