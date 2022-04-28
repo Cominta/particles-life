@@ -5,12 +5,7 @@ MainState::MainState(sf::RenderWindow* window)
 {
     this->statesClass = State::states::MAINSTATE;
 
-    this->quadtree = new Quadtree(4, 200, 200, 200, 200);
-
-    for (int i = 0; i < 600; i++)
-    {
-        this->quadtree->insert(new Point(100 * i, 10 + i * 3));
-    }
+    this->quadtree = new Quadtree(this->window, 4, this->window->getSize().x / 2, this->window->getSize().y / 2, this->window->getSize().x, this->window->getSize().y);
 }
 
 MainState::~MainState()
@@ -21,6 +16,11 @@ MainState::~MainState()
 void MainState::update(float deltaTime, bool mousePress)
 {
     this->updateMouse();
+
+    if (mousePress)
+    {
+        this->quadtree->insert(new Point(this->window, this->mousePosition.x, this->mousePosition.y));
+    }
 
     for (auto& object : this->objects)
     {
@@ -34,4 +34,6 @@ void MainState::render()
     {
         object->render();
     }
+
+    this->quadtree->render();
 }

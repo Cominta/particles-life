@@ -2,15 +2,22 @@
 #define POINT_H
 
 #include <iostream>
+#include <SFML/Graphics.hpp>
 
 class Point
 {
+    private:
+        sf::RenderWindow* window;
+        sf::CircleShape* c;
+
     public:
         int x;
         int y;
 
-        Point(int x, int y);
+        Point(sf::RenderWindow* window, int x, int y);
         ~Point();
+
+        void render();
 };
 
 #endif

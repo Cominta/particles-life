@@ -3,7 +3,6 @@
 
 #include "point.h"
 #include <vector>
-#include <SFML/Graphics.hpp>
 
 class Quadtree
 {
@@ -16,6 +15,7 @@ class Quadtree
         bool divided;
 
         sf::RectangleShape* boundary;
+        sf::RenderWindow* window;
         std::vector<Point*> points;
 
         Quadtree* lt; // left-top
@@ -24,7 +24,7 @@ class Quadtree
         Quadtree* lb; // left-bottom
 
     public:
-        Quadtree(int size, float x, float y, float width, float height);
+        Quadtree(sf::RenderWindow* window, int size, float x, float y, float width, float height);
         ~Quadtree();
 
         void insert(Point* point);
