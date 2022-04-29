@@ -18,10 +18,16 @@ Quadtree::~Quadtree()
 
 }
 
+
+bool Quadtree::intersects(Point* point)
+{
+    return ((*point).x + (*point).width >= this->x - this->width / 2 && (*point).x - (*point).width <= this->x + this->width / 2 &&
+        (*point).y + (*point).height >= this->y - this->height / 2 && (*point).y - (*point).height <= this->y + this->height / 2);
+}
+
 void Quadtree::insert(Point* point)
 {
-    if (!((*point).x + 2.5f >= this->x - this->width / 2 && (*point).x - 2.5f <= this->x + this->width / 2 &&
-        (*point).y + 2.5f >= this->y - this->height / 2 && (*point).y - 2.5f <= this->y + this->height / 2)) // AABB
+    if (!this->intersects(point)) // AABB
     {
         return;
     }
@@ -29,7 +35,6 @@ void Quadtree::insert(Point* point)
     if (this->points.size() < this->size)
     {
         this->points.emplace_back(point);
-        std::cout << "W " << this->points.size() << "\n";
     }
 
     else
@@ -66,6 +71,33 @@ void Quadtree::subdivide()
     this->rt = new Quadtree(this->window, 4, this->x + this->width / 4, this->y - this->height / 4, newWidth, newHeight);
     this->rb = new Quadtree(this->window, 4, this->x + this->width / 4, this->y + this->height / 4, newWidth, newHeight);
     this->lb = new Quadtree(this->window, 4, this->x - this->width / 4, this->y + this->height / 4, newWidth, newHeight);
+}
+
+void Quadtree::query(sf::RectangleShape* range, std::vector<Point*>& found)
+{
+    if (!this->boundary->getGlobalBounds().intersects(range->getGlobalBounds()))
+    {
+        return;
+    }
+
+    else
+    {
+        for (auto &point : this->points)
+        {
+            if (range->getGlobalBounds().intersects(point->r->getGlobalBounds()))
+            {
+                found.emplace_back(point);
+            }
+        }
+
+        if (divided)
+        {
+            this->lt->query(range, found);
+            this->rt->query(range, found);
+            this->rb->query(range, found);
+            this->lb->query(range, found);
+        }
+    }
 }
 
 void Quadtree::update()

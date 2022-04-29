@@ -10,6 +10,8 @@ class MainState : public State
 {
     private:
         std::vector<Square*> objects;
+        sf::RectangleShape* range;
+        std::vector<Point*> found;
 
         Quadtree* quadtree;
 

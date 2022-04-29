@@ -8,11 +8,14 @@ class Point
 {
     private:
         sf::RenderWindow* window;
-        sf::RectangleShape* r;
 
     public:
+        sf::RectangleShape* r;
+        
         int x;
         int y;
+        int width; 
+        int height;
 
         Point(sf::RenderWindow* window, int x, int y);
         ~Point();

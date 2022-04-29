@@ -27,8 +27,10 @@ class Quadtree
         Quadtree(sf::RenderWindow* window, int size, float x, float y, float width, float height);
         ~Quadtree();
 
+        bool intersects(Point* point);
         void insert(Point* point);
         void subdivide();
+        void query(sf::RectangleShape* range, std::vector<Point*>& found);
 
         void update();
         void render();
