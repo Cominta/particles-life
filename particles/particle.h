@@ -2,11 +2,18 @@
 #define PARTICLE_H
 
 #include <SFML/Graphics.hpp>
+#include "../components/hitbox/hitboxSquare.h"
 
 class Particle
 {
-    private:
-        
+    protected:
+        sf::RenderWindow* window;
+        sf::CircleShape* shape;
+
+        HitboxSquare* hitbox;
+        HitboxSquare* hitboxRange;
+
+        int d, x ,y;
 
     public:
         enum class classParticle
@@ -14,7 +21,7 @@ class Particle
             RED
         };
 
-        Particle();
+        Particle(sf::RenderWindow* window, int d, int x, int y);
         ~Particle();
 
         virtual void update();

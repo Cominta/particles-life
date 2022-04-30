@@ -3,12 +3,8 @@
 Quadtree::Quadtree(sf::RenderWindow* window, int size, float x, float y, float width, float height)
     : window(window), size(size), x(x), y(y), width(width), height(height)
 {
-    this->boundary = new sf::RectangleShape(sf::Vector2f(this->width, this->height));
+    this->boundary = new HitboxSquare(window, this->width, this->height);
     this->boundary->setPosition(this->x, this->y);
-    this->boundary->setOrigin(this->width / 2, this->height / 2);
-    this->boundary->setFillColor(sf::Color::Transparent);
-    this->boundary->setOutlineColor(sf::Color::White);
-    this->boundary->setOutlineThickness(1.0f);
 
     this->divided = false;
 }
@@ -18,16 +14,9 @@ Quadtree::~Quadtree()
 
 }
 
-
-bool Quadtree::intersects(Point* point)
+void Quadtree::insert(HitboxSquare* point)
 {
-    return ((*point).x + (*point).width >= this->x - this->width / 2 && (*point).x - (*point).width <= this->x + this->width / 2 &&
-        (*point).y + (*point).height >= this->y - this->height / 2 && (*point).y - (*point).height <= this->y + this->height / 2);
-}
-
-void Quadtree::insert(Point* point)
-{
-    if (!this->intersects(point)) // AABB
+    if (!this->boundary->intersects(point)) // AABB
     {
         return;
     }
@@ -73,9 +62,9 @@ void Quadtree::subdivide()
     this->lb = new Quadtree(this->window, 4, this->x - this->width / 4, this->y + this->height / 4, newWidth, newHeight);
 }
 
-void Quadtree::query(sf::RectangleShape* range, std::vector<Point*>& found)
+void Quadtree::query(HitboxSquare* range, std::vector<HitboxSquare*>& found)
 {
-    if (!this->boundary->getGlobalBounds().intersects(range->getGlobalBounds()))
+    if (!this->boundary->intersects(range))
     {
         return;
     }
@@ -84,7 +73,7 @@ void Quadtree::query(sf::RectangleShape* range, std::vector<Point*>& found)
     {
         for (auto &point : this->points)
         {
-            if (range->getGlobalBounds().intersects(point->r->getGlobalBounds()))
+            if (range->intersects(point))
             {
                 found.emplace_back(point);
             }
@@ -107,12 +96,7 @@ void Quadtree::update()
 
 void Quadtree::render()
 {
-    this->window->draw(*this->boundary);
-
-    for (auto &point : this->points)
-    {
-        point->render();
-    }
+    this->boundary->render();
 
     if (divided)
     {

@@ -11,16 +11,6 @@ Hitbox::~Hitbox()
 
 }
 
-Hitbox::sides Hitbox::checkObject(sf::RectangleShape* frame)
-{
-
-}
-
-Hitbox::sides Hitbox::checkObject(Hitbox* hitbox)
-{
-
-}
-
 void Hitbox::update()
 {
 

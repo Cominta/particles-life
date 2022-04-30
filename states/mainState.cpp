@@ -6,12 +6,6 @@ MainState::MainState(sf::RenderWindow* window)
     this->statesClass = State::states::MAINSTATE;
 
     this->quadtree = new Quadtree(this->window, 4, this->window->getSize().x / 2, this->window->getSize().y / 2, this->window->getSize().x, this->window->getSize().y);
-    
-    this->range = new sf::RectangleShape(sf::Vector2f(200, 200));
-    this->range->setOrigin(100, 100);
-    this->range->setFillColor(sf::Color::Transparent);
-    this->range->setOutlineColor(sf::Color::Green);
-    this->range->setOutlineThickness(1.0f);
 }
 
 MainState::~MainState()
@@ -25,28 +19,24 @@ void MainState::update(float deltaTime, bool mousePress)
 
     if (mousePress)
     {
-        this->quadtree->insert(new Point(this->window, this->mousePosition.x, this->mousePosition.y));
+        Red* newParticle = new Red(this->window, 10, this->mousePosition.x, this->mousePosition.y);
+        this->particles.emplace_back(newParticle);
+        newParticle->update();
+        this->quadtree->insert(newParticle->getHitbox());
     }
 
-    this->range->setPosition(this->mousePosition);
-
-    this->found.clear();
-    this->quadtree->query(range, this->found);
-
-    for (auto &point : this->found)
+    for (auto &particle : this->particles)
     {
-        point->r->setFillColor(sf::Color::Green);
+        particle->update();
     }
 }
 
 void MainState::render()
 {
-    this->window->draw(*this->range);
     this->quadtree->render();
     
-    for (auto &point : this->found)
+    for (auto &particle : this->particles)
     {
-        point->r->setFillColor(sf::Color::White);
+        particle->render();
     }
-
 }

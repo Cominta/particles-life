@@ -1,7 +1,7 @@
 #ifndef QUADTREE_H
 #define QUADTREE_H
 
-#include "point.h"
+#include "../hitbox/hitboxSquare.h"
 #include <vector>
 
 class Quadtree
@@ -14,9 +14,9 @@ class Quadtree
         float height;
         bool divided;
 
-        sf::RectangleShape* boundary;
+        HitboxSquare* boundary;
         sf::RenderWindow* window;
-        std::vector<Point*> points;
+        std::vector<HitboxSquare*> points;
 
         Quadtree* lt; // left-top
         Quadtree* rt; // right-top
@@ -27,10 +27,9 @@ class Quadtree
         Quadtree(sf::RenderWindow* window, int size, float x, float y, float width, float height);
         ~Quadtree();
 
-        bool intersects(Point* point);
-        void insert(Point* point);
+        void insert(HitboxSquare* point);
         void subdivide();
-        void query(sf::RectangleShape* range, std::vector<Point*>& found);
+        void query(HitboxSquare* range, std::vector<HitboxSquare*>& found);
 
         void update();
         void render();

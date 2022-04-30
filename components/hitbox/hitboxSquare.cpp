@@ -1,6 +1,6 @@
 #include "hitboxSquare.h"
 
-HitboxSquare::HitboxSquare(sf::RenderWindow* window, sf::RectangleShape* parentShape, float width, float height)
+HitboxSquare::HitboxSquare(sf::RenderWindow* window, float width, float height, sf::CircleShape* parentShape)
     : Hitbox(window), parentShape(parentShape), width(width), height(height)
 {
     float thickness = 1.0f;
@@ -17,10 +17,22 @@ HitboxSquare::~HitboxSquare()
 
 }
 
+bool HitboxSquare::intersects(HitboxSquare* other)
+{
+    return ((*other).x + (*other).width >= this->x - this->width / 2 && (*other).x - (*other).width <= this->x + this->width / 2 &&
+            (*other).y + (*other).height >= this->y - this->height / 2 && (*other).y - (*other).height <= this->y + this->height / 2);
+}
+
 void HitboxSquare::update()
 {
-    this->hitboxShape->setPosition(this->parentShape->getPosition());
-    this->hitboxShape->setRotation(this->parentShape->getRotation());
+    this->x = this->parentShape->getPosition().x;
+    this->y = this->parentShape->getPosition().y;
+
+    if (this->parentShape != nullptr)
+    {
+        this->hitboxShape->setPosition(x, y);
+        this->hitboxShape->setRotation(this->parentShape->getRotation());
+    }
 }
 
 void HitboxSquare::render()
