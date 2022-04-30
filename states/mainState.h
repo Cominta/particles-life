@@ -2,14 +2,13 @@
 #define MAINSTATE_H
 
 #include "state.h"
-#include "../shapes/square.h"
+#include "particles/red.h"
 #include <vector>
 #include "../components/quadtree/quadtree.h"
 
 class MainState : public State
 {
     private:
-        std::vector<Square*> objects;
         sf::RectangleShape* range;
         std::vector<Point*> found;
 

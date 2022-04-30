@@ -37,20 +37,10 @@ void MainState::update(float deltaTime, bool mousePress)
     {
         point->r->setFillColor(sf::Color::Green);
     }
-
-    for (auto& object : this->objects)
-    {
-        object->update(deltaTime);
-    }
 }
 
 void MainState::render()
 {
-    for (auto& object : this->objects)
-    {
-        object->render();
-    }
-
     this->window->draw(*this->range);
     this->quadtree->render();
     

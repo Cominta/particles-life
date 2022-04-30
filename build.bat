@@ -1,1 +1,1 @@
-g++ *.cpp states/*.cpp shapes/*.cpp components/hitbox/*.cpp components/quadtree/*.cpp -o build/main.exe -LD:\lib -lsfml-graphics-d -lsfml-window-d -lsfml-system-d
+g++ *.cpp states/*.cpp particles/*.cpp components/hitbox/*.cpp components/quadtree/*.cpp -o build/main.exe -LD:\lib -lsfml-graphics-d -lsfml-window-d -lsfml-system-d
