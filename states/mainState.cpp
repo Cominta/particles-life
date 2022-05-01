@@ -15,7 +15,14 @@ MainState::~MainState()
 
 void MainState::update(float deltaTime, bool mousePress)
 {
+    this->quadtree->clear();
+
     this->updateMouse();
+
+    for (auto &particle : this->particles)
+    {
+        this->quadtree->insert(particle);
+    }
 
     for (auto &particle : this->particles)
     {

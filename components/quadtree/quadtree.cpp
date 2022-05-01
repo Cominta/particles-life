@@ -16,7 +16,13 @@ Quadtree::~Quadtree()
 
 void Quadtree::clear()
 {
-    
+    this->particles.clear();
+    this->divided = false;
+
+    this->lt = nullptr;
+    this->rt = nullptr;
+    this->rb = nullptr;
+    this->lb = nullptr;
 }
 
 void Quadtree::insert(Particle* particle)
