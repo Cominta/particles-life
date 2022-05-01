@@ -13,19 +13,26 @@ class Particle
         HitboxSquare* hitbox;
         HitboxSquare* hitboxRange;
 
-        int d, x ,y;
 
     public:
-        enum class classParticle
+        int d, x ,y;
+
+        enum class particleClass
         {
             RED
         };
+    
+        particleClass classP;
 
         Particle(sf::RenderWindow* window, int d, int x, int y);
         ~Particle();
 
         virtual void update();
+        virtual void update(float deltaTime, std::vector<Particle*> foundRange);
         virtual void render();
+
+        HitboxSquare* getHitbox() {return this->hitbox;};
+        HitboxSquare* getHitboxRange() {return this->hitboxRange;};
 };
 
 #endif

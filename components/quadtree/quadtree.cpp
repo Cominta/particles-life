@@ -14,16 +14,21 @@ Quadtree::~Quadtree()
 
 }
 
-void Quadtree::insert(HitboxSquare* point)
+void Quadtree::clear()
 {
-    if (!this->boundary->intersects(point)) // AABB
+    
+}
+
+void Quadtree::insert(Particle* particle)
+{
+    if (!this->boundary->intersects(particle->getHitbox())) // AABB
     {
         return;
     }
 
-    if (this->points.size() < this->size)
+    if (this->particles.size() < this->size)
     {
-        this->points.emplace_back(point);
+        this->particles.emplace_back(particle);
     }
 
     else
@@ -44,10 +49,10 @@ void Quadtree::insert(HitboxSquare* point)
             // this->points.clear();
         }
 
-        this->lt->insert(point);
-        this->rt->insert(point);
-        this->rb->insert(point);
-        this->lb->insert(point);
+        this->lt->insert(particle);
+        this->rt->insert(particle);
+        this->rb->insert(particle);
+        this->lb->insert(particle);
     }
 }
 
@@ -62,7 +67,7 @@ void Quadtree::subdivide()
     this->lb = new Quadtree(this->window, 4, this->x - this->width / 4, this->y + this->height / 4, newWidth, newHeight);
 }
 
-void Quadtree::query(HitboxSquare* range, std::vector<HitboxSquare*>& found)
+void Quadtree::query(HitboxSquare* range, std::vector<Particle*>& found)
 {
     if (!this->boundary->intersects(range))
     {
@@ -71,9 +76,9 @@ void Quadtree::query(HitboxSquare* range, std::vector<HitboxSquare*>& found)
 
     else
     {
-        for (auto &point : this->points)
+        for (auto &point : this->particles)
         {
-            if (range->intersects(point))
+            if (range->intersects(point->getHitbox()))
             {
                 found.emplace_back(point);
             }

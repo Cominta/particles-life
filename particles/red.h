@@ -3,16 +3,18 @@
 
 #include "particle.h"
 
-class Red  : public Particle
+class Red : public Particle
 {
+    private:
+        int currentSpeedX;
+        int currentSpeedY;
+    
     public:
         Red(sf::RenderWindow* window, int d, int x, int y);
         ~Red();
 
-        void update();
+        void update(float deltaTime, std::vector<Particle*> foundRange);
         void render();
-
-        HitboxSquare* getHitbox() {return this->hitbox;};
 };
 
 #endif

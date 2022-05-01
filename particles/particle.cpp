@@ -16,6 +16,11 @@ void Particle::update()
 
 }
 
+void Particle::update(float deltaTime, std::vector<Particle*> foundRange)
+{
+
+}
+
 void Particle::render()
 {
 

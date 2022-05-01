@@ -19,6 +19,7 @@ void Engine::start()
     {
         this->update();
         this->render();
+        this->deltaClock.restart();
     }
 }
 
@@ -58,9 +59,7 @@ void Engine::updateSFML()
 
 void Engine::updateDelta()
 {
-    sf::Clock deltaClock;
-    sf::Time deltaTime = deltaClock.restart();
-    this->delta = deltaTime.asSeconds();
+    this->delta = this->deltaClock.getElapsedTime().asSeconds();
 }
 
 void Engine::render()

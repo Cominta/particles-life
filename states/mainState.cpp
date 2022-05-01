@@ -17,17 +17,22 @@ void MainState::update(float deltaTime, bool mousePress)
 {
     this->updateMouse();
 
+    for (auto &particle : this->particles)
+    {
+        std::vector<Particle*> foundRange;
+        this->quadtree->query(particle->getHitboxRange(), foundRange);
+        particle->update(deltaTime, foundRange);
+    }
+
     if (mousePress)
     {
         Red* newParticle = new Red(this->window, 10, this->mousePosition.x, this->mousePosition.y);
         this->particles.emplace_back(newParticle);
-        newParticle->update();
-        this->quadtree->insert(newParticle->getHitbox());
-    }
 
-    for (auto &particle : this->particles)
-    {
-        particle->update();
+        std::vector<Particle*> foundRange;
+        this->quadtree->query(newParticle->getHitboxRange(), foundRange);
+        newParticle->update(deltaTime, foundRange);
+        this->quadtree->insert(newParticle);
     }
 }
 

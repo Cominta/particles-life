@@ -2,6 +2,7 @@
 #define QUADTREE_H
 
 #include "../hitbox/hitboxSquare.h"
+#include "../../particles/particle.h"
 #include <vector>
 
 class Quadtree
@@ -16,7 +17,7 @@ class Quadtree
 
         HitboxSquare* boundary;
         sf::RenderWindow* window;
-        std::vector<HitboxSquare*> points;
+        std::vector<Particle*> particles;
 
         Quadtree* lt; // left-top
         Quadtree* rt; // right-top
@@ -27,9 +28,10 @@ class Quadtree
         Quadtree(sf::RenderWindow* window, int size, float x, float y, float width, float height);
         ~Quadtree();
 
-        void insert(HitboxSquare* point);
+        void clear();
+        void insert(Particle* particle);
         void subdivide();
-        void query(HitboxSquare* range, std::vector<HitboxSquare*>& found);
+        void query(HitboxSquare* range, std::vector<Particle*>& found);
 
         void update();
         void render();

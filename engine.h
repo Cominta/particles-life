@@ -8,8 +8,10 @@ class Engine
 {
     private:
         sf::Event sfEvent;
+        sf::Clock deltaClock;
         sf::RenderWindow *window;
         std::stack<State *> states;
+        
         float delta;
         bool mousePress;
 
